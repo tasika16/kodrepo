@@ -1,0 +1,44 @@
+.fields {
+  display: flex;
+  justify-content: space-evenly;
+
+  .field {
+    flex: 0 1 auto;
+    .value {
+      margin-top: 0.8rem;
+
+      select {
+        width: 100%
+      }
+    }
+  }
+}
+
+.controls {
+  margin-top: 1.4rem;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.error {
+  text-align: center;
+  color: red;
+  margin-top: 1.4rem;
+  font-size: 1.2em;
+  font-weight: 800;
+}
+
+.convert {
+  margin-top: 1.4rem;
+  .from-amount {
+    text-align: center;
+    font-size: 1.2em;
+    font-weight: 800;
+  }
+  .to-amount {
+    text-align: center;
+    margin-top: 1.4rem;
+    font-size: 1.4em;
+    font-weight: 1000;
+  }
+}

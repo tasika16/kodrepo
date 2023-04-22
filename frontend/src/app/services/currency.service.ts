@@ -9,7 +9,6 @@ import {ChangeRateDto} from "../dtos/changeRate.dto";
 export class CurrencyService {
 
   private getCurrenciesUrl = 'http://localhost:3000/symbols';
-  private changeRateUrl = 'http://localhost:3000/convert';
 
   constructor(private http :HttpClient) { }
 
@@ -18,7 +17,8 @@ export class CurrencyService {
   }
 
   convertRate(changeRateDto :ChangeRateDto) :Observable<number> {
-    this.changeRateUrl += `?from=${changeRateDto.from}&to=${changeRateDto.to}&amount=${changeRateDto.amount}`;
-    return this.http.get<number>(this.changeRateUrl);
+    let changeRateUrl = 'http://localhost:3000/convert';
+    changeRateUrl += `?from=${changeRateDto.from}&to=${changeRateDto.to}&amount=${changeRateDto.amount}`;
+    return this.http.get<number>(changeRateUrl);
   }
 }

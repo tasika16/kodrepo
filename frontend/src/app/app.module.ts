@@ -5,16 +5,20 @@ import { AppComponent } from './app.component';
 import { ChangeRateComponent } from './components/change-rate/change-rate.component';
 import { FormsModule } from "@angular/forms";
 import { HttpClientModule } from '@angular/common/http';
+import {MatDialogModule} from '@angular/material/dialog';
+import { NewChangeRateDialogComponent } from './components/new-change-rate-dialog/new-change-rate-dialog.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ChangeRateComponent
+    ChangeRateComponent,
+    NewChangeRateDialogComponent
   ],
     imports: [
       BrowserModule,
       FormsModule,
-      HttpClientModule
+      HttpClientModule,
+      MatDialogModule
     ],
   providers: [],
   bootstrap: [AppComponent]

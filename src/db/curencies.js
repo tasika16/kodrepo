@@ -5,21 +5,32 @@ const collectionName = 'currencies';
 
 async function list (){
   const currencies = await getDb().collection(collectionName).find().toArray();
-  return currencies.map(c => c.code);
+  return currency_arr = [...currencies.map(c => c.from), ...currencies.map(c => c.to)];
+}
+
+async function getCurrency(id){
+  const resut = await getDb().collection(collectionName).findOne({id: id});
+  if (!resut) {
+    return {error: 'Currency not found'};
+  }
+
+  return resut;
 }
 
 async function createCurrency(currency) {
   const db = getDb();
-  console.log(currency)
-  const exists = await db.collection(collectionName).findOne({code: currency.code});
-  if (exists) {
+
+  const existRate = await db.collection(collectionName).findOne({id: currency.id});
+  if (existRate) {
     return {error: 'Currency already exists'};
   }
+
   const result = await db.collection(collectionName).insertOne(currency);
-  return result;
+  return currency;
 }
 
 module.exports = {
   createCurrency,
-  list
+  list,
+  getCurrency
 };

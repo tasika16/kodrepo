@@ -1,37 +1,51 @@
 <form (ngSubmit)="convert()">
-  <div class="field">
-    <div class="descr">
-      <span>Összeg</span>
+  <div class="fields">
+    <div class="field">
+      <div class="descr">
+        <span>Összeg</span>
+      </div>
+      <div class="value">
+        <input type="text" name="amount" [(ngModel)]="changeRateDto.amount">
+      </div>
     </div>
-    <div class="value">
-      <input name="amount" [(ngModel)]="changeRateDto.amount">
+    <div class="field">
+      <div class="descr">
+        <span>Erről a valutáról</span>
+      </div>
+      <div class="value">
+        <select class="from-currency" [(ngModel)]="changeRateDto.from" [ngModelOptions]="{standalone: true}">
+          <option *ngFor="let currency of currencies" [ngValue]="currency">
+            {{currency}}
+          </option>
+        </select>
+      </div>
+    </div>
+    <div class="field">
+      <div class="descr">
+        <span>Erre a valutára</span>
+      </div>
+      <div class="value">
+        <select class="to-currency" [(ngModel)]="changeRateDto.to" [ngModelOptions]="{standalone: true}">
+          <option *ngFor="let currency of currencies" [ngValue]="currency">
+            {{currency}}
+          </option>
+        </select>
+      </div>
     </div>
   </div>
-  <div class="field">
-    <div class="descr">
-      <span>Erről a valutáról</span>
-    </div>
-    <div class="value">
-      <select class="from-currency" [(ngModel)]="from" [ngModelOptions]="{standalone: true}">
-        <option *ngFor="let currency of currencies" [ngValue]="currency">
-          {{currency}}
-        </option>
-      </select>
-    </div>
-  </div>
-  <div class="field">
-    <div class="descr">
-      <span>Erre a valutára</span>
-    </div>
-    <div class="value">
-      <select class="to-currency" [(ngModel)]="to" [ngModelOptions]="{standalone: true}">
-        <option *ngFor="let currency of currencies" [ngValue]="currency">
-          {{currency}}
-        </option>
-      </select>
-    </div>
-  </div>
-  <div class="btn">
-    <button type="submit">Mehet</button>
+  <div class="btn controls">
+    <button class="lets-go" type="submit">Mehet</button>
+    <button class="new-change-rate" (click)="openNewChangeRate($event)">Új átváltási ráta felvétele</button>
   </div>
 </form>
+<div *ngIf="changeRateResult && changeRateDto.to" class="convert">
+  <div class="from-amount">
+    {{changeRateDto.amount | currency: changeRateDto.from : 'symbol':'1.0-0':'hu' }} =
+  </div>
+  <div class="to-amount">
+    {{changeRateResult | currency: changeRateDto.to : 'symbol':'1.0-0':'hu' }}
+  </div>
+</div>
+<div *ngIf="changeRateError" class="error">
+  <span>{{changeRateError}}</span>
+</div>
