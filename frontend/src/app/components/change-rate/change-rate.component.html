@@ -1,0 +1,37 @@
+<form (ngSubmit)="convert()">
+  <div class="field">
+    <div class="descr">
+      <span>Összeg</span>
+    </div>
+    <div class="value">
+      <input name="amount" [(ngModel)]="changeRateDto.amount">
+    </div>
+  </div>
+  <div class="field">
+    <div class="descr">
+      <span>Erről a valutáról</span>
+    </div>
+    <div class="value">
+      <select class="from-currency" [(ngModel)]="from" [ngModelOptions]="{standalone: true}">
+        <option *ngFor="let currency of currencies" [ngValue]="currency">
+          {{currency}}
+        </option>
+      </select>
+    </div>
+  </div>
+  <div class="field">
+    <div class="descr">
+      <span>Erre a valutára</span>
+    </div>
+    <div class="value">
+      <select class="to-currency" [(ngModel)]="to" [ngModelOptions]="{standalone: true}">
+        <option *ngFor="let currency of currencies" [ngValue]="currency">
+          {{currency}}
+        </option>
+      </select>
+    </div>
+  </div>
+  <div class="btn">
+    <button type="submit">Mehet</button>
+  </div>
+</form>

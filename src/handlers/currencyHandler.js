@@ -24,6 +24,7 @@ async function convertCurrencies (req, res) {
       typeof amount !== 'number') {
     return res.status(400).send({message: 'Invalid data type!'});
   }
+
   const changeRate = {
     from: 'EUR',
     to: 'HUF',

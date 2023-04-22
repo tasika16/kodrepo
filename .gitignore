@@ -1,3 +1,7 @@
+.idea/*
+frontend/.vscode/
+frontend/.editorconfig
+frontend/.gitignore
 /frontend/node_modules
 /node_modules
 .env
