@@ -1,0 +1,81 @@
+:host {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+
+  section {
+    visibility: hidden;
+    opacity: 0;
+
+    &.open {
+      visibility: inherit;
+      opacity: 1;
+    }
+
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    background: rgba(0, 0, 0, 0.2);
+    transition: opacity 250ms ease-in;
+
+    >div {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 20rem;
+      height: 14rem;
+
+      background: white;
+      padding: 1.4rem;
+
+      border-radius: 1rem;
+
+      box-shadow: 0 0 1rem 0.4rem rgba(0, 0, 0, 0.1);
+
+      .error {
+        margin: 0;
+        height: 1em;
+
+        h6 {
+          margin: 0;
+        }
+      }
+
+      .fields {
+        margin: 1.4rem 0;
+
+        .field {
+          display: flex;
+          justify-content: space-between;
+          margin: 0.8rem 0;
+        }
+      }
+
+      .controls {
+        display: flex;
+        justify-content: space-around;
+      }
+    }
+
+    .close {
+      position: absolute;
+      top: 0;
+      right: 0;
+      z-index: 1002;
+
+      padding: 1rem;
+    }
+
+  }
+}
+
+:host(:not(.open)) {
+  display: none;
+}

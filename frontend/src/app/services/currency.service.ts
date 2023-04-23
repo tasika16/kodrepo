@@ -16,6 +16,11 @@ export class CurrencyService {
     return this.http.get<string[]>(this.getCurrenciesUrl);
   }
 
+  addNewCurrency(changeRateDto :ChangeRateDto) :Observable<ChangeRateDto> {
+    changeRateDto.id = `${changeRateDto.from};${changeRateDto.to}`;
+    return this.http.post<ChangeRateDto>('http://localhost:3000/change-rate', changeRateDto);
+  }
+
   convertRate(changeRateDto :ChangeRateDto) :Observable<number> {
     let changeRateUrl = 'http://localhost:3000/convert';
     changeRateUrl += `?from=${changeRateDto.from}&to=${changeRateDto.to}&amount=${changeRateDto.amount}`;

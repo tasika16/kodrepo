@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {ChangeRateDto} from "./dtos/changeRate.dto";
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,10 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'fronted';
+
+  changeRateDtoInput :ChangeRateDto;
+
+  updateChangeRate(data :ChangeRateDto) {
+    this.changeRateDtoInput = data;
+  }
 }

@@ -5,7 +5,8 @@ const collectionName = 'currencies';
 
 async function list (){
   const currencies = await getDb().collection(collectionName).find().toArray();
-  return currency_arr = [...currencies.map(c => c.from), ...currencies.map(c => c.to)];
+  const currency_arr = [...currencies.map(c => c.from), ...currencies.map(c => c.to)];
+  return [...new Set(currency_arr)];
 }
 
 async function getCurrency(id){
@@ -22,7 +23,7 @@ async function createCurrency(currency) {
 
   const existRate = await db.collection(collectionName).findOne({id: currency.id});
   if (existRate) {
-    return {error: 'Currency already exists'};
+    return {error: 'Currency already exists', code: 'duplicate'};
   }
 
   const result = await db.collection(collectionName).insertOne(currency);

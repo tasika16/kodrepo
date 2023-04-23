@@ -1,2 +1,3 @@
 <h1>Online valutaváltó</h1>
-<app-change-rate></app-change-rate>
+<app-change-rate [changeRateDtoInput]="changeRateDtoInput"></app-change-rate>
+<app-new-change-rate-dialog (changeRateUpdate)="updateChangeRate($event)"> </app-new-change-rate-dialog>

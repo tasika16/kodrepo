@@ -48,7 +48,7 @@ async function createCurrency(req, res) {
   const result = await currencies.createCurrency(req.body);
 
   if (result.error) {
-    return res.status(400).send(result.error);
+    return res.status(400).send(result);
   }
 
   res.status(201).send(result);

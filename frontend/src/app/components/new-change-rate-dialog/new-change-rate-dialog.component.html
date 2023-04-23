@@ -1,1 +1,32 @@
-<p>new-change-rate-dialog works!</p>
+<ng-container *ngIf="display$ | async as display" [class.open]="display === 'open'">
+  <section (click)="close($event)" [class.open]="display === 'open'" >
+    <div (click)="$event.stopPropagation()">
+      <div class="modal-body">
+        <div class="error">
+          <h6 *ngIf="changeRateError">Ez a ráta már létezik próbálj másikat!</h6>
+        </div>
+        <h4>Új átváltási ráta felvétele</h4>
+        <form (ngSubmit)="save()">
+          <div class="fields">
+            <div class="field">
+              <label for="from">Erről a valutáról</label>
+              <input type="text" id="from" name="from" [(ngModel)]="changeRateDto.from">
+            </div>
+            <div class="field">
+              <label for="from">Erről a valutáról</label>
+              <input type="text" id="to" name="to" [(ngModel)]="changeRateDto.to">
+            </div>
+            <div class="field">
+              <label for="from">Ráta</label>
+              <input type="text" id="rate" name="rate" [(ngModel)]="changeRateDto.rate">
+            </div>
+          </div>
+          <div class="controls">
+            <button type="submit">Mentés</button>
+            <button (click)="close($event)">Mégse</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+</ng-container>

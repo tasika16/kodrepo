@@ -1,10 +1,9 @@
-import { Component } from '@angular/core';
+import {Component, Input, SimpleChange} from '@angular/core';
 import { ChangeRateDto } from "../../dtos/changeRate.dto";
 import { CurrencyService } from "../../services/currency.service";
 import { registerLocaleData } from '@angular/common';
 import localeHu from '@angular/common/locales/hu';
-import {MatDialog, MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
-import {NewChangeRateDialogComponent} from "../new-change-rate-dialog/new-change-rate-dialog.component";
+import {ModalService} from "../../services/modal.service";
 registerLocaleData(localeHu, 'hu');
 
 @Component({
@@ -19,8 +18,16 @@ export class ChangeRateComponent {
   changeRateResult :number;
   changeRateError :string;
 
-  constructor(private currencyService :CurrencyService, private dialog :MatDialog) {
+  @Input()
+  changeRateDtoInput :ChangeRateDto;
+
+  constructor(private currencyService :CurrencyService, private modalService :ModalService) {
     this.changeRateResult = 0;
+  }
+
+  ngOnchanges(changes :any) {
+    this.currencies.push(changes.changeRateDtoInput.currentValue.from,
+      changes.changeRateDtoInput.currentValue.to);
   }
 
   async ngOnInit () {
@@ -32,8 +39,8 @@ export class ChangeRateComponent {
   }
 
   openNewChangeRate(event :any) {
-    event.preventDefault()
-    const dialogRef = this.dialog.open(NewChangeRateDialogComponent);
+    event.preventDefault();
+    this.modalService.open();
   }
 
   convert() {
@@ -46,5 +53,4 @@ export class ChangeRateComponent {
       }
     });
   }
-
 }
